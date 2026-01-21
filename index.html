@@ -68,8 +68,8 @@
 
         let width, height, centerX, centerY;
         let trailLength = 50;
-        const numStars = 250;
-        const stars = [];
+        const numStars = 200;
+        let stars = [];
 
         function resize() {
             width = canvas.width = window.innerWidth;
@@ -78,88 +78,103 @@
             centerY = height / 2;
         }
 
-        function createStar() {
-            // Use polar coordinates - angle and distance from center
-            return {
-                angle: Math.random() * Math.PI * 2,
-                dist: Math.random() * 0.01, // Start very close to center (0-1 range, will be scaled)
-                speed: 0.002 + Math.random() * 0.002,
-                size: Math.random() * 1.5 + 0.5,
-                hue: Math.random() * 60 + 200,
-                saturation: Math.random() * 30
-            };
+        function resetStar(star, randomizeDistance) {
+            // Random angle from center
+            const angle = Math.random() * Math.PI * 2;
+
+            // Distance from center (normalized 0-1, where 1 = edge of screen)
+            // New stars start at center, existing stars can be spread out
+            const dist = randomizeDistance ? Math.random() * 0.8 + 0.1 : 0.01;
+
+            star.angle = angle;
+            star.dist = dist;
+            star.prevDist = dist; // Previous distance for trail
+            star.speed = 0.005 + Math.random() * 0.005;
+            star.size = Math.random() * 1.5 + 0.5;
+            star.hue = Math.random() * 60 + 200;
+            star.saturation = Math.random() * 30;
         }
 
         function init() {
             resize();
-            stars.length = 0;
+            stars = [];
 
-            // Clear the canvas completely
+            // Clear canvas
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, width, height);
 
-            // Create stars spread out at different distances
             for (let i = 0; i < numStars; i++) {
-                const star = createStar();
-                star.dist = Math.random(); // Spread initial stars across full range
+                const star = {};
+                resetStar(star, true); // Spread initial stars
                 stars.push(star);
             }
         }
 
+        function getScreenPos(angle, dist) {
+            // Convert normalized distance to actual screen distance
+            const maxDist = Math.max(width, height);
+            const screenDist = dist * maxDist;
+            return {
+                x: centerX + Math.cos(angle) * screenDist,
+                y: centerY + Math.sin(angle) * screenDist
+            };
+        }
+
+        function isOffScreen(x, y) {
+            return x < -50 || x > width + 50 || y < -50 || y > height + 50;
+        }
+
         function animate() {
-            // Clear with solid black for clean rendering
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+            // Fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, width, height);
 
-            const maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
-
             for (const star of stars) {
-                // Move star outward
-                star.dist += star.speed * (1 + star.dist * 3); // Accelerate as it moves out
+                // Store previous distance for trail calculation
+                star.prevDist = star.dist;
+
+                // Move outward - accelerate as distance increases
+                star.dist += star.speed * (1 + star.dist * 2);
+
+                // Get current screen position
+                const pos = getScreenPos(star.angle, star.dist);
 
                 // Reset if off screen
-                if (star.dist > 1.5) {
-                    star.dist = 0.001;
-                    star.angle = Math.random() * Math.PI * 2;
-                    star.speed = 0.002 + Math.random() * 0.002;
-                    continue; // Skip drawing this frame to avoid artifacts
+                if (isOffScreen(pos.x, pos.y)) {
+                    resetStar(star, false);
+                    continue; // Don't draw this frame
                 }
 
-                // Calculate actual screen position
-                const screenDist = star.dist * maxDist;
-                const x = centerX + Math.cos(star.angle) * screenDist;
-                const y = centerY + Math.sin(star.angle) * screenDist;
+                // Don't draw if too close to center
+                if (star.dist < 0.03) continue;
 
-                // Don't draw if too close to center (prevents center artifacts)
-                if (star.dist < 0.02) continue;
+                // Calculate trail position (where star was)
+                const trailFactor = (trailLength / 100) * 0.4;
+                const trailDist = star.dist - (star.dist - star.prevDist) * trailFactor * 10;
+                const trailPos = getScreenPos(star.angle, Math.max(0.01, trailDist));
 
-                // Calculate trail end (closer to center)
-                const trailFactor = (trailLength / 100) * 0.3;
-                const trailDist = Math.max(0, star.dist - trailFactor * star.dist);
-                const trailScreenDist = trailDist * maxDist;
-                const trailX = centerX + Math.cos(star.angle) * trailScreenDist;
-                const trailY = centerY + Math.sin(star.angle) * trailScreenDist;
+                // Brightness based on distance
+                const brightness = Math.min(1, star.dist * 2);
+                const currentSize = star.size * (0.5 + star.dist * 3);
 
-                // Brightness increases with distance from center
-                const brightness = Math.min(1, star.dist * 1.5);
-                const currentSize = star.size * (0.5 + star.dist * 2);
-
-                // Draw trail
-                const gradient = ctx.createLinearGradient(trailX, trailY, x, y);
+                // Draw the trail line
+                const gradient = ctx.createLinearGradient(
+                    trailPos.x, trailPos.y, pos.x, pos.y
+                );
                 gradient.addColorStop(0, `hsla(${star.hue}, ${star.saturation}%, 100%, 0)`);
                 gradient.addColorStop(1, `hsla(${star.hue}, ${star.saturation}%, 100%, ${brightness})`);
 
                 ctx.beginPath();
-                ctx.moveTo(trailX, trailY);
-                ctx.lineTo(x, y);
+                ctx.moveTo(trailPos.x, trailPos.y);
+                ctx.lineTo(pos.x, pos.y);
                 ctx.strokeStyle = gradient;
                 ctx.lineWidth = Math.max(0.5, currentSize);
                 ctx.lineCap = 'round';
                 ctx.stroke();
 
-                // Draw star head
+                // Draw star point
                 ctx.beginPath();
-                ctx.arc(x, y, Math.max(0.5, currentSize * 0.8), 0, Math.PI * 2);
+                ctx.arc(pos.x, pos.y, Math.max(0.5, currentSize), 0, Math.PI * 2);
                 ctx.fillStyle = `hsla(${star.hue}, ${star.saturation}%, 100%, ${brightness})`;
                 ctx.fill();
             }
@@ -167,7 +182,6 @@
             requestAnimationFrame(animate);
         }
 
-        // Event listeners
         window.addEventListener('resize', init);
 
         trailSlider.addEventListener('input', (e) => {
@@ -175,7 +189,6 @@
             trailValueDisplay.textContent = trailLength;
         });
 
-        // Start
         init();
         animate();
     </script>
