@@ -28,22 +28,22 @@
 
     .controls {
       position: fixed;
-      top: 24px;
-      right: 24px;
+      top: 16px;
+      right: 16px;
       z-index: 100;
-      background: rgba(10, 5, 20, 0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 100, 200, 0.3);
-      border-radius: 12px;
-      min-width: 220px;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 100, 0, 0.4);
+      border-radius: 8px;
+      min-width: 180px;
       box-shadow:
-        0 0 40px rgba(255, 50, 150, 0.15),
+        0 0 30px rgba(255, 80, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
       overflow: hidden;
     }
 
     .controls-header {
-      padding: 14px 20px;
+      padding: 10px 14px;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -52,22 +52,22 @@
     }
 
     .controls-header:hover {
-      background: rgba(255, 100, 200, 0.1);
+      background: rgba(255, 100, 0, 0.15);
     }
 
     .controls-header h3 {
-      color: rgba(255, 180, 220, 0.9);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 3px;
+      color: rgba(255, 150, 50, 0.9);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
       margin: 0;
-      text-shadow: 0 0 20px rgba(255, 100, 200, 0.5);
+      text-shadow: 0 0 15px rgba(255, 100, 0, 0.6);
     }
 
     .toggle-icon {
-      color: rgba(255, 180, 220, 0.7);
-      font-size: 12px;
+      color: rgba(255, 150, 50, 0.7);
+      font-size: 10px;
       transition: transform 0.3s ease;
     }
 
@@ -76,8 +76,8 @@
     }
 
     .controls-content {
-      padding: 0 20px 20px 20px;
-      max-height: 200px;
+      padding: 0 14px 14px 14px;
+      max-height: 150px;
       overflow: hidden;
       transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
       opacity: 1;
@@ -85,41 +85,41 @@
 
     .controls.collapsed .controls-content {
       max-height: 0;
-      padding: 0 20px;
+      padding: 0 14px;
       opacity: 0;
     }
 
     .slider-container {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .slider-label {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: rgba(255, 200, 230, 0.7);
-      font-size: 10px;
-      letter-spacing: 1.5px;
+      color: rgba(200, 200, 200, 0.7);
+      font-size: 8px;
+      letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     .slider-value {
-      color: #ff9ed2;
+      color: #ff8c00;
       font-weight: 700;
-      font-size: 12px;
-      text-shadow: 0 0 10px rgba(255, 100, 200, 0.6);
+      font-size: 10px;
+      text-shadow: 0 0 8px rgba(255, 100, 0, 0.6);
     }
 
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg,
-        rgba(180, 60, 150, 0.4) 0%,
-        rgba(255, 100, 200, 0.6) 100%);
+        rgba(100, 50, 0, 0.5) 0%,
+        rgba(255, 100, 0, 0.7) 100%);
       border-radius: 2px;
       outline: none;
       cursor: pointer;
@@ -128,68 +128,68 @@
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle at 30% 30%, #ffc0e0, #ff40a0);
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at 30% 30%, #ffcc80, #ff6600);
       border-radius: 50%;
       cursor: pointer;
       box-shadow:
-        0 0 15px rgba(255, 100, 200, 0.8),
-        0 0 30px rgba(255, 100, 200, 0.4);
+        0 0 12px rgba(255, 100, 0, 0.9),
+        0 0 25px rgba(255, 100, 0, 0.4);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     input[type="range"]::-webkit-slider-thumb:hover {
       transform: scale(1.15);
       box-shadow:
-        0 0 20px rgba(255, 150, 220, 1),
-        0 0 40px rgba(255, 150, 220, 0.6);
+        0 0 18px rgba(255, 120, 0, 1),
+        0 0 35px rgba(255, 120, 0, 0.6);
     }
 
     input[type="range"]::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle at 30% 30%, #ffc0e0, #ff40a0);
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at 30% 30%, #ffcc80, #ff6600);
       border-radius: 50%;
       cursor: pointer;
       border: none;
       box-shadow:
-        0 0 15px rgba(255, 100, 200, 0.8),
-        0 0 30px rgba(255, 100, 200, 0.4);
+        0 0 12px rgba(255, 100, 0, 0.9),
+        0 0 25px rgba(255, 100, 0, 0.4);
     }
 
     .speed-control {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 100, 200, 0.15);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 100, 0, 0.2);
     }
 
     .hint {
       position: fixed;
-      bottom: 24px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      color: rgba(255, 150, 200, 0.4);
-      font-size: 10px;
-      letter-spacing: 2px;
+      color: rgba(255, 150, 50, 0.3);
+      font-size: 9px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      text-shadow: 0 0 20px rgba(255, 100, 200, 0.3);
+      text-shadow: 0 0 15px rgba(255, 100, 0, 0.3);
     }
   </style>
 </head>
 <body>
   <canvas id="starfield"></canvas>
 
-  <div class="controls" id="controls">
+  <div class="controls collapsed" id="controls">
     <div class="controls-header" id="controlsHeader">
-      <h3>Hyperspace Controls</h3>
+      <h3>Controls</h3>
       <span class="toggle-icon">▲</span>
     </div>
 
     <div class="controls-content">
       <div class="slider-container">
         <div class="slider-label">
-          <span>Trail Length</span>
+          <span>Trail</span>
           <span class="slider-value" id="trailValue">50</span>
         </div>
         <input type="range" id="trailSlider" min="5" max="150" value="50">
@@ -197,7 +197,7 @@
 
       <div class="slider-container speed-control">
         <div class="slider-label">
-          <span>Warp Speed</span>
+          <span>Speed</span>
           <span class="slider-value" id="speedValue">15</span>
         </div>
         <input type="range" id="speedSlider" min="2" max="40" value="15">
@@ -205,7 +205,7 @@
     </div>
   </div>
 
-  <div class="hint">Entering Hyperspace</div>
+  <div class="hint">Lightspeed</div>
 
   <script>
     const canvas = document.getElementById('starfield');
@@ -214,7 +214,7 @@
     let width, height, centerX, centerY;
     let trailLength = 50;
     let speed = 15;
-    const numStars = 600;
+    const numStars = 500;
     const stars = [];
 
     // UI Elements
@@ -250,14 +250,14 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Color palettes - warm sunset/nebula colors
+    // Color palettes - fiery, aggressive colors
     const colorPalettes = [
-      { hue: 320, sat: 80 },  // Pink/Magenta
-      { hue: 280, sat: 70 },  // Purple
-      { hue: 340, sat: 85 },  // Hot pink
-      { hue: 20, sat: 90 },   // Orange
-      { hue: 45, sat: 95 },   // Gold
-      { hue: 180, sat: 60 },  // Teal accent
+      { hue: 25, sat: 100 },   // Deep orange
+      { hue: 15, sat: 95 },    // Red-orange
+      { hue: 35, sat: 90 },    // Amber
+      { hue: 0, sat: 85 },     // Red
+      { hue: 45, sat: 100 },   // Gold
+      { hue: 200, sat: 70 },   // Steel blue accent
     ];
 
     class Star {
@@ -266,9 +266,9 @@
       }
 
       reset() {
-        // Start near center with random angle
+        // Start further from center for less density in middle
         const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 50 + 5;
+        const distance = Math.random() * 100 + 30; // Increased minimum distance
 
         this.x = Math.cos(angle) * distance;
         this.y = Math.sin(angle) * distance;
@@ -281,10 +281,10 @@
         // Star properties
         this.brightness = Math.random() * 0.5 + 0.5;
 
-        // Pick from color palette with weighted randomness
+        // Pick from color palette
         const palette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
-        this.hue = palette.hue + (Math.random() * 30 - 15);
-        this.saturation = palette.sat + (Math.random() * 20 - 10);
+        this.hue = palette.hue + (Math.random() * 20 - 10);
+        this.saturation = palette.sat + (Math.random() * 15 - 7);
       }
 
       update() {
@@ -324,17 +324,17 @@
         const trailX = (pastX / trailZ) * 1000 + centerX;
         const trailY = (pastY / trailZ) * 1000 + centerY;
 
-        // Size based on distance - bigger stars!
-        const size = Math.max(0.5, (1 - this.z / 1500) * 4);
+        // Size based on distance
+        const size = Math.max(0.5, (1 - this.z / 1500) * 3.5);
 
         // Opacity based on distance
         const alpha = Math.min(1, (1 - this.z / 1500) * this.brightness);
 
         // Draw trail
         const gradient = ctx.createLinearGradient(trailX, trailY, screenX, screenY);
-        gradient.addColorStop(0, `hsla(${this.hue}, ${this.saturation}%, 60%, 0)`);
-        gradient.addColorStop(0.5, `hsla(${this.hue}, ${this.saturation - 10}%, 70%, ${alpha * 0.5})`);
-        gradient.addColorStop(1, `hsla(${this.hue}, ${this.saturation - 20}%, 90%, ${alpha})`);
+        gradient.addColorStop(0, `hsla(${this.hue}, ${this.saturation}%, 50%, 0)`);
+        gradient.addColorStop(0.5, `hsla(${this.hue}, ${this.saturation - 10}%, 60%, ${alpha * 0.5})`);
+        gradient.addColorStop(1, `hsla(${this.hue}, ${this.saturation - 20}%, 85%, ${alpha})`);
 
         ctx.beginPath();
         ctx.moveTo(trailX, trailY);
@@ -346,65 +346,64 @@
 
         // Draw star head (bright point)
         ctx.beginPath();
-        ctx.arc(screenX, screenY, size * 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, ${this.saturation - 30}%, 95%, ${alpha})`;
+        ctx.arc(screenX, screenY, size * 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.hue + 10}, ${this.saturation - 40}%, 95%, ${alpha})`;
         ctx.fill();
 
         // Glow effect
         const glowGradient = ctx.createRadialGradient(
           screenX, screenY, 0,
-          screenX, screenY, size * 5
+          screenX, screenY, size * 4
         );
-        glowGradient.addColorStop(0, `hsla(${this.hue}, ${this.saturation}%, 80%, ${alpha * 0.5})`);
-        glowGradient.addColorStop(1, `hsla(${this.hue}, ${this.saturation}%, 80%, 0)`);
+        glowGradient.addColorStop(0, `hsla(${this.hue}, ${this.saturation}%, 70%, ${alpha * 0.4})`);
+        glowGradient.addColorStop(1, `hsla(${this.hue}, ${this.saturation}%, 70%, 0)`);
 
         ctx.beginPath();
-        ctx.arc(screenX, screenY, size * 5, 0, Math.PI * 2);
+        ctx.arc(screenX, screenY, size * 4, 0, Math.PI * 2);
         ctx.fillStyle = glowGradient;
         ctx.fill();
       }
     }
 
-    // Initialize stars with more near the edges (lower z values)
+    // Initialize stars with bias toward edges
     for (let i = 0; i < numStars; i++) {
       const star = new Star();
-      // Bias toward lower z values (closer/edge stars) for more density at edges
-      const zBias = Math.pow(Math.random(), 0.6); // Power < 1 biases toward lower values
+      // Bias toward lower z values for more edge density
+      const zBias = Math.pow(Math.random(), 0.5);
       star.z = zBias * 1500;
       stars.push(star);
     }
 
-    // Central glow effect - warmer colors
+    // Subtle center glow - dark and minimal
     function drawCenterGlow() {
       const gradient = ctx.createRadialGradient(
         centerX, centerY, 0,
-        centerX, centerY, 200
+        centerX, centerY, 120
       );
-      gradient.addColorStop(0, 'rgba(255, 200, 230, 0.1)');
-      gradient.addColorStop(0.3, 'rgba(255, 100, 180, 0.05)');
-      gradient.addColorStop(0.6, 'rgba(150, 50, 150, 0.02)');
-      gradient.addColorStop(1, 'rgba(50, 20, 80, 0)');
+      gradient.addColorStop(0, 'rgba(255, 100, 30, 0.03)');
+      gradient.addColorStop(0.5, 'rgba(255, 50, 0, 0.01)');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
     }
 
-    // Vignette effect - purple tint
+    // Vignette effect - dark edges
     function drawVignette() {
       const gradient = ctx.createRadialGradient(
-        centerX, centerY, height * 0.3,
-        centerX, centerY, height * 0.9
+        centerX, centerY, height * 0.35,
+        centerX, centerY, height * 0.95
       );
       gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-      gradient.addColorStop(1, 'rgba(20, 0, 30, 0.8)');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0.7)');
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
     }
 
     function animate() {
-      // Slight motion blur effect - darker purple tint
-      ctx.fillStyle = 'rgba(5, 0, 10, 0.25)';
+      // Motion blur - pure black
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.28)';
       ctx.fillRect(0, 0, width, height);
 
       drawCenterGlow();
