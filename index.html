@@ -90,6 +90,10 @@
                 this.x = centerX + Math.cos(angle) * distance;
                 this.y = centerY + Math.sin(angle) * distance;
 
+                // Initialize previous position to current (prevents weird lines on reset)
+                this.prevX = this.x;
+                this.prevY = this.y;
+
                 // Direction from center
                 this.angle = Math.atan2(this.y - centerY, this.x - centerX);
 
@@ -179,6 +183,9 @@
                 // Spread initial stars across the screen
                 star.x = Math.random() * width;
                 star.y = Math.random() * height;
+                // Set previous position to current to prevent initial weird lines
+                star.prevX = star.x;
+                star.prevY = star.y;
                 star.angle = Math.atan2(star.y - centerY, star.x - centerX);
                 star.speed = Math.random() * 5 + 2;
                 stars.push(star);
